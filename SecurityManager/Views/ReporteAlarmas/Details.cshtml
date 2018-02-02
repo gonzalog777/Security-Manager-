@@ -1,0 +1,36 @@
+﻿@model SecurityManager.Models.AppModels.ReporteAlarma
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ReporteAlarma</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Alarma)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Alarma)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Funciona)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Funciona)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Comentarios)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Comentarios)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ReporteAlarmaId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

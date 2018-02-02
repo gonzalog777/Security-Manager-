@@ -1,0 +1,12 @@
+c:\users\garciarevollo\source\repos\SecurityManager\SecurityManager\bin\Debug\netcoreapp2.0\SecurityManager.deps.json
+c:\users\garciarevollo\source\repos\SecurityManager\SecurityManager\bin\Debug\netcoreapp2.0\SecurityManager.runtimeconfig.json
+c:\users\garciarevollo\source\repos\SecurityManager\SecurityManager\bin\Debug\netcoreapp2.0\SecurityManager.runtimeconfig.dev.json
+c:\users\garciarevollo\source\repos\SecurityManager\SecurityManager\bin\Debug\netcoreapp2.0\SecurityManager.dll
+c:\users\garciarevollo\source\repos\SecurityManager\SecurityManager\bin\Debug\netcoreapp2.0\SecurityManager.pdb
+c:\users\garciarevollo\source\repos\SecurityManager\SecurityManager\obj\Debug\netcoreapp2.0\SecurityManager.csprojResolveAssemblyReference.cache
+c:\users\garciarevollo\source\repos\SecurityManager\SecurityManager\obj\Debug\netcoreapp2.0\SecurityManager.csproj.CoreCompileInputs.cache
+c:\users\garciarevollo\source\repos\SecurityManager\SecurityManager\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
+c:\users\garciarevollo\source\repos\SecurityManager\SecurityManager\obj\Debug\netcoreapp2.0\SecurityManager.AssemblyInfoInputs.cache
+c:\users\garciarevollo\source\repos\SecurityManager\SecurityManager\obj\Debug\netcoreapp2.0\SecurityManager.AssemblyInfo.cs
+c:\users\garciarevollo\source\repos\SecurityManager\SecurityManager\obj\Debug\netcoreapp2.0\SecurityManager.dll
+c:\users\garciarevollo\source\repos\SecurityManager\SecurityManager\obj\Debug\netcoreapp2.0\SecurityManager.pdb
