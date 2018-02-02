@@ -1,0 +1,53 @@
+﻿@model IEnumerable<SecurityManager.Models.AppModels.ReporteEpp>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Epp)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Comentarios)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Fecha)
+                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Empleado)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Epp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comentarios)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Empleado.Nombre)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ReporteEppId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ReporteEppId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ReporteEppId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
