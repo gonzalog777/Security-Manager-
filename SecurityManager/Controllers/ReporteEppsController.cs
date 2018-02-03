@@ -22,7 +22,7 @@ namespace SecurityManager.Controllers
         // GET: ReporteEpps
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Epps.Include(r => r.Empleado);
+            var applicationDbContext = _context.ReporteEpps.Include(r => r.Empleado).Include(r => r.Epp);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -34,8 +34,9 @@ namespace SecurityManager.Controllers
                 return NotFound();
             }
 
-            var reporteEpp = await _context.Epps
+            var reporteEpp = await _context.ReporteEpps
                 .Include(r => r.Empleado)
+                .Include(r => r.Epp)
                 .SingleOrDefaultAsync(m => m.ReporteEppId == id);
             if (reporteEpp == null)
             {
@@ -48,7 +49,8 @@ namespace SecurityManager.Controllers
         // GET: ReporteEpps/Create
         public IActionResult Create()
         {
-            ViewData["EmpleadoId"] = new SelectList(_context.Empleados, "EmpleadoId", "Nombre");
+            ViewData["EmpleadoId"] = new SelectList(_context.Empleados, "EmpleadoId", "EmpleadoId");
+            ViewData["EppId"] = new SelectList(_context.Epps, "EppId", "EppId");
             return View();
         }
 
@@ -57,7 +59,7 @@ namespace SecurityManager.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ReporteEppId,Epp,Comentarios,Fecha,EmpleadoId")] ReporteEpp reporteEpp)
+        public async Task<IActionResult> Create([Bind("ReporteEppId,Comentarios,Fecha,EppId,EmpleadoId")] ReporteEpp reporteEpp)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +67,8 @@ namespace SecurityManager.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EmpleadoId"] = new SelectList(_context.Empleados, "EmpleadoId", "Nombre", reporteEpp.EmpleadoId);
+            ViewData["EmpleadoId"] = new SelectList(_context.Empleados, "EmpleadoId", "EmpleadoId", reporteEpp.EmpleadoId);
+            ViewData["EppId"] = new SelectList(_context.Epps, "EppId", "EppId", reporteEpp.EppId);
             return View(reporteEpp);
         }
 
@@ -77,12 +80,13 @@ namespace SecurityManager.Controllers
                 return NotFound();
             }
 
-            var reporteEpp = await _context.Epps.SingleOrDefaultAsync(m => m.ReporteEppId == id);
+            var reporteEpp = await _context.ReporteEpps.SingleOrDefaultAsync(m => m.ReporteEppId == id);
             if (reporteEpp == null)
             {
                 return NotFound();
             }
-            ViewData["EmpleadoId"] = new SelectList(_context.Empleados, "EmpleadoId", "Nombre", reporteEpp.EmpleadoId);
+            ViewData["EmpleadoId"] = new SelectList(_context.Empleados, "EmpleadoId", "EmpleadoId", reporteEpp.EmpleadoId);
+            ViewData["EppId"] = new SelectList(_context.Epps, "EppId", "EppId", reporteEpp.EppId);
             return View(reporteEpp);
         }
 
@@ -91,7 +95,7 @@ namespace SecurityManager.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ReporteEppId,Epp,Comentarios,Fecha,EmpleadoId")] ReporteEpp reporteEpp)
+        public async Task<IActionResult> Edit(int id, [Bind("ReporteEppId,Comentarios,Fecha,EppId,EmpleadoId")] ReporteEpp reporteEpp)
         {
             if (id != reporteEpp.ReporteEppId)
             {
@@ -118,7 +122,8 @@ namespace SecurityManager.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EmpleadoId"] = new SelectList(_context.Empleados, "EmpleadoId", "Nombre", reporteEpp.EmpleadoId);
+            ViewData["EmpleadoId"] = new SelectList(_context.Empleados, "EmpleadoId", "EmpleadoId", reporteEpp.EmpleadoId);
+            ViewData["EppId"] = new SelectList(_context.Epps, "EppId", "EppId", reporteEpp.EppId);
             return View(reporteEpp);
         }
 
@@ -130,8 +135,9 @@ namespace SecurityManager.Controllers
                 return NotFound();
             }
 
-            var reporteEpp = await _context.Epps
+            var reporteEpp = await _context.ReporteEpps
                 .Include(r => r.Empleado)
+                .Include(r => r.Epp)
                 .SingleOrDefaultAsync(m => m.ReporteEppId == id);
             if (reporteEpp == null)
             {
@@ -146,15 +152,15 @@ namespace SecurityManager.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var reporteEpp = await _context.Epps.SingleOrDefaultAsync(m => m.ReporteEppId == id);
-            _context.Epps.Remove(reporteEpp);
+            var reporteEpp = await _context.ReporteEpps.SingleOrDefaultAsync(m => m.ReporteEppId == id);
+            _context.ReporteEpps.Remove(reporteEpp);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ReporteEppExists(int id)
         {
-            return _context.Epps.Any(e => e.ReporteEppId == id);
+            return _context.ReporteEpps.Any(e => e.ReporteEppId == id);
         }
     }
 }

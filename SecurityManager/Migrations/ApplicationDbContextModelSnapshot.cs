@@ -8,13 +8,12 @@ using Microsoft.EntityFrameworkCore.Storage.Internal;
 using SecurityManager.Data;
 using System;
 
-namespace SecurityManager.Data.Migrations
+namespace SecurityManager.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180202022025_AnhadirCargo")]
-    partial class AnhadirCargo
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -180,6 +179,31 @@ namespace SecurityManager.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("SecurityManager.Models.AppModels.Area", b =>
+                {
+                    b.Property<int>("AreaId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Nombre");
+
+                    b.HasKey("AreaId");
+
+                    b.ToTable("Area");
+                });
+
+            modelBuilder.Entity("SecurityManager.Models.AppModels.AreaEpp", b =>
+                {
+                    b.Property<int>("AreaId");
+
+                    b.Property<int>("EppId");
+
+                    b.HasKey("AreaId", "EppId");
+
+                    b.HasIndex("EppId");
+
+                    b.ToTable("AreaEpp");
+                });
+
             modelBuilder.Entity("SecurityManager.Models.AppModels.Cargo", b =>
                 {
                     b.Property<int>("CargoId")
@@ -192,6 +216,56 @@ namespace SecurityManager.Data.Migrations
                     b.ToTable("Cargo");
                 });
 
+            modelBuilder.Entity("SecurityManager.Models.AppModels.Empleado", b =>
+                {
+                    b.Property<int>("EmpleadoId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("CargoId");
+
+                    b.Property<DateTime>("FechaNacimiento");
+
+                    b.Property<string>("Nombre");
+
+                    b.HasKey("EmpleadoId");
+
+                    b.HasIndex("CargoId");
+
+                    b.ToTable("Empleado");
+                });
+
+            modelBuilder.Entity("SecurityManager.Models.AppModels.Epp", b =>
+                {
+                    b.Property<int>("EppId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Nombre");
+
+                    b.HasKey("EppId");
+
+                    b.ToTable("Epp");
+                });
+
+            modelBuilder.Entity("SecurityManager.Models.AppModels.ReporteAccidente", b =>
+                {
+                    b.Property<int>("ReporteAccidenteId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Accidente");
+
+                    b.Property<string>("Comentarios");
+
+                    b.Property<int>("EmpleadoId");
+
+                    b.Property<DateTime>("Fecha");
+
+                    b.HasKey("ReporteAccidenteId");
+
+                    b.HasIndex("EmpleadoId");
+
+                    b.ToTable("Accidente");
+                });
+
             modelBuilder.Entity("SecurityManager.Models.AppModels.ReporteAlarma", b =>
                 {
                     b.Property<int>("ReporteAlarmaId")
@@ -201,11 +275,35 @@ namespace SecurityManager.Data.Migrations
 
                     b.Property<string>("Comentarios");
 
+                    b.Property<DateTime>("Fecha");
+
                     b.Property<bool>("Funciona");
 
                     b.HasKey("ReporteAlarmaId");
 
                     b.ToTable("Alarma");
+                });
+
+            modelBuilder.Entity("SecurityManager.Models.AppModels.ReporteEpp", b =>
+                {
+                    b.Property<int>("ReporteEppId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Comentarios");
+
+                    b.Property<int>("EmpleadoId");
+
+                    b.Property<int>("EppId");
+
+                    b.Property<DateTime>("Fecha");
+
+                    b.HasKey("ReporteEppId");
+
+                    b.HasIndex("EmpleadoId");
+
+                    b.HasIndex("EppId");
+
+                    b.ToTable("ReporteEpp");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -250,6 +348,48 @@ namespace SecurityManager.Data.Migrations
                     b.HasOne("SecurityManager.Models.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("SecurityManager.Models.AppModels.AreaEpp", b =>
+                {
+                    b.HasOne("SecurityManager.Models.AppModels.Area", "Area")
+                        .WithMany("AreaEpp")
+                        .HasForeignKey("AreaId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("SecurityManager.Models.AppModels.Epp", "Epp")
+                        .WithMany("AreaEpp")
+                        .HasForeignKey("EppId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("SecurityManager.Models.AppModels.Empleado", b =>
+                {
+                    b.HasOne("SecurityManager.Models.AppModels.Cargo", "Cargo")
+                        .WithMany()
+                        .HasForeignKey("CargoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("SecurityManager.Models.AppModels.ReporteAccidente", b =>
+                {
+                    b.HasOne("SecurityManager.Models.AppModels.Empleado", "Empleado")
+                        .WithMany()
+                        .HasForeignKey("EmpleadoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("SecurityManager.Models.AppModels.ReporteEpp", b =>
+                {
+                    b.HasOne("SecurityManager.Models.AppModels.Empleado", "Empleado")
+                        .WithMany()
+                        .HasForeignKey("EmpleadoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("SecurityManager.Models.AppModels.Epp", "Epp")
+                        .WithMany()
+                        .HasForeignKey("EppId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

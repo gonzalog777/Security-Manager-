@@ -13,9 +13,6 @@
     <thead>
         <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Epp)
-                </th>
-                <th>
                     @Html.DisplayNameFor(model => model.Comentarios)
                 </th>
                 <th>
@@ -24,6 +21,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Empleado)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Epp)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -31,16 +31,16 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Epp)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Comentarios)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Fecha)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Empleado.Nombre)
+                @Html.DisplayFor(modelItem => item.Empleado.EmpleadoId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Epp.EppId)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ReporteEppId">Edit</a> |

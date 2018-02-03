@@ -10,11 +10,12 @@ namespace SecurityManager.Models.AppModels
     {
         [Key]
         public int ReporteEppId { get; set; }
-        public string Epp { get; set; }//IdEpp
         public string Comentarios { get; set; }
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         [DataType(DataType.Date)]
         public DateTime Fecha { get; set; }
+        public int EppId { get; set; }
+        public Epp Epp { get; set; }
         public int EmpleadoId { get; set; }
         public Empleado Empleado { get; set; }
     }
